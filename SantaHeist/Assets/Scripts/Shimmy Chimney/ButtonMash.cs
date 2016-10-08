@@ -1,0 +1,106 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class ButtonMash : MonoBehaviour {
+
+	[SerializeField]
+	private Image _buttonQ;
+	[SerializeField]
+	private Image _buttonW;
+	[SerializeField]
+	private Image _progressBar;
+	[SerializeField]
+	private Text _timeText;
+
+	public enum Keys
+	{
+		W,
+		Q
+	}
+
+	private Keys _key;
+	private Keys _nextKey;
+	private int _timeLimit;
+	private int _timeLeft;
+
+	void Awake()
+	{
+		_nextKey = Keys.Q;
+		_timeLimit = (int) Time.time + 11;
+	}
+
+	public void TransitionState(Keys nextKey)
+	{
+		_key = nextKey;
+	}
+
+	void Update()
+	{
+		if (_progressBar.fillAmount == 1)
+		{
+			//Player won game
+			Debug.Log("Player won");
+		}
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			_key = Keys.Q;
+			if(_key == _nextKey)
+			{
+				//Corect
+				_key = _nextKey;
+				if(_nextKey == Keys.Q)
+				{
+					_buttonQ.color = Color.grey;
+					_buttonW.color = Color.white;
+					_nextKey = Keys.W;
+					_progressBar.fillAmount += .01f;
+				}
+				else
+				{
+					_buttonQ.color = Color.white;
+					_buttonW.color = Color.grey;
+					_nextKey = Keys.Q;
+				}
+			}
+			else
+			{
+				//Incorrect
+			}
+		}
+		else if (Input.GetKeyDown(KeyCode.W))
+		{
+			_key = Keys.W;
+			if (_key == _nextKey)
+			{
+				//Corect
+				_key = _nextKey;
+				if (_nextKey == Keys.W)
+				{
+					_buttonQ.color = Color.white;
+					_buttonW.color = Color.grey;
+					_nextKey = Keys.Q;
+					_progressBar.fillAmount += .01f;
+				}
+				else
+				{
+					_buttonQ.color = Color.grey;
+					_buttonW.color = Color.white;
+					_nextKey = Keys.W;
+				}
+			}
+			else
+			{
+				//Incorrect
+			}
+
+		}
+		_timeLeft = (int) (_timeLimit - Time.time);
+		_timeText.text = (_timeLeft).ToString();
+		if(_timeLeft <= 0)
+		{
+			//Game end and lost
+			Debug.Log("Game end");
+		}
+	}
+}
