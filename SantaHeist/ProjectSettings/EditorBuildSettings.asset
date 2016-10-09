@@ -13,3 +13,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Workbench_fillSleigh.unity
   - enabled: 1
     path: Assets/Scenes/workbench_stocking.unity
+  - enabled: 1
+    path: Assets/Scenes/TypingGame.unity
+  - enabled: 1
+    path: Assets/Scenes/SideScroller.unity

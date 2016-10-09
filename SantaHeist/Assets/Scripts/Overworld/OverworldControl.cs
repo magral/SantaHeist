@@ -24,6 +24,11 @@ public class OverworldControl : MonoBehaviour {
 		get { return _instance; }
 	}
 
+	public GameState State
+	{
+		get { return _state; }
+	}
+
 	void Awake()
 	{
 		if(_instance == null)
@@ -37,7 +42,7 @@ public class OverworldControl : MonoBehaviour {
 		DontDestroyOnLoad(this.gameObject);
 		_state = GameState.Game1;
 	}
-
+	/*
 	public void CheckState(int button)
 	{
 		switch (button)
@@ -51,7 +56,7 @@ public class OverworldControl : MonoBehaviour {
 			case 1:
 				if(_state == GameState.Game2)
 				{
-					SceneManager.LoadScene("");
+					SceneManager.LoadScene("SideScroller");
 				}
 				break;
 			case 2:
@@ -82,7 +87,7 @@ public class OverworldControl : MonoBehaviour {
 				Debug.LogWarning("Button number went wrong");
 				break;
 		}
-	}
+	}*/
 
 	public void TransitionState(GameState newState)
 	{

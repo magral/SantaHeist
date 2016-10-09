@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SackController : MonoBehaviour {
 
@@ -9,9 +10,11 @@ public class SackController : MonoBehaviour {
 	private Rigidbody2D _rb;
 	private Rect _cameraRect;
 
+	private int _score;
 
 	void Awake()
 	{
+		_score = 0;
 		_rb = GetComponent<Rigidbody2D>();
 		Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
 		Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(
@@ -31,11 +34,18 @@ public class SackController : MonoBehaviour {
 		 Mathf.Clamp(transform.position.x , _cameraRect.xMin, _cameraRect.xMax),
 		 Mathf.Clamp(transform.position.y, _cameraRect.yMin, _cameraRect.yMax),
 		 transform.position.z);
+		if(_score == 10)
+		{
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
+			SceneManager.LoadScene("OverworldMap");
+			Debug.Log("YOU WIN");
+		}
 
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
+		_score += 1;
 		Destroy(other.gameObject);
 	}
 

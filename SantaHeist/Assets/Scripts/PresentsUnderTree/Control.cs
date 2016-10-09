@@ -10,6 +10,19 @@ public class Control : MonoBehaviour {
 	[SerializeField]
 	private InputField input;
 
+	//Present Spawn Points
+	[SerializeField]
+	private Transform _present1;
+	[SerializeField]
+	private Transform _present2;
+	[SerializeField]
+	private Transform _present3;
+	[SerializeField]
+	private Transform _present4;
+	[SerializeField]
+	private Transform _present5;
+
+
 	private List<Text> texts;
 	private Text _currentText;
 	private int _currentIndex;
@@ -45,10 +58,30 @@ public class Control : MonoBehaviour {
 		if(field.text.Trim().Equals( _currentString.Trim()))
 		{
 			Debug.Log("correct");
+			switch (_currentIndex)
+			{
+				case 1:
+					_present1.GetComponent<SpriteRenderer>().enabled = true;
+					break;
+				case 2:
+					_present2.GetComponent<SpriteRenderer>().enabled = true;
+					break;
+				case 3:
+					_present3.GetComponent<SpriteRenderer>().enabled = true;
+					break;
+				case 4:
+					_present4.GetComponent<SpriteRenderer>().enabled = true;
+					break;
+				case 5:
+					_present5.GetComponent<SpriteRenderer>().enabled = true;
+					break;
+			}
 			UpdateText();
 			field.Select();
 			field.text = "";
 			field.ActivateInputField();
+			Debug.Log(_currentIndex);
+			
 		}
 		else
 		{
@@ -68,7 +101,8 @@ public class Control : MonoBehaviour {
 		else
 		{
 			//End game;
-			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
+			//OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
+			//Debug.Log("EndGame");
 		}
 	}
 }
