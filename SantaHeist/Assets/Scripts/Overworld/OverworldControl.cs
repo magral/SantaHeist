@@ -12,7 +12,8 @@ public class OverworldControl : MonoBehaviour {
 		Game3,
 		Game4,
 		Game5,
-		Game6
+		Game6,
+		GameEnd
 	}
 
 	private static OverworldControl _instance = null;

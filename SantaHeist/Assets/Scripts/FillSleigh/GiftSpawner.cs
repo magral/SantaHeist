@@ -33,13 +33,11 @@ public class GiftSpawner : MonoBehaviour {
 		if(_timeTilDrop <= 0)
 		{
 			instGift = SpawnPresent(_drop1, _drop2, _drop3);
-			Debug.Log("spawn");
 			_dropTime += 2;
 
 		}
 		if (instGift != null && instGift.transform.position.y < KillZ)
 		{
-			Debug.Log("DESTROY");
 			Destroy(instGift.gameObject);
 		}
 	}

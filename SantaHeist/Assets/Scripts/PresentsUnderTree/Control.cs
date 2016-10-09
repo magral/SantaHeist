@@ -53,15 +53,22 @@ public class Control : MonoBehaviour {
 		else
 		{
 			Debug.Log(field.text);
-			Debug.Log("incorrect");
 		}
 	}
 
 	public void UpdateText()
 	{
 		_currentText.color = Color.black;
-		_currentText = texts[_currentIndex++];
-		_currentString = _currentText.text;
-		_currentText.color = Color.yellow;
+		if (_currentIndex + 1 <= texts.Count)
+		{
+			_currentText = texts[_currentIndex++];
+			_currentString = _currentText.text;
+			_currentText.color = Color.yellow;
+		}
+		else
+		{
+			//End game;
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
+		}
 	}
 }

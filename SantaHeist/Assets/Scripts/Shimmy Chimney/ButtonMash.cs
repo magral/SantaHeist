@@ -42,8 +42,8 @@ public class ButtonMash : MonoBehaviour {
 	{
 		if (_progressBar.fillAmount == 1)
 		{
-			//Player won game
 			Debug.Log("Player won");
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game4);
 		}
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
@@ -107,7 +107,7 @@ public class ButtonMash : MonoBehaviour {
 		if(_timeLeft <= 0)
 		{
 			//Game end and lost
-			Debug.Log("Game end");
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game4);
 		}
 	}
 }
