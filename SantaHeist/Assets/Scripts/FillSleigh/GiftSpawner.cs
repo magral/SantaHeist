@@ -22,7 +22,7 @@ public class GiftSpawner : MonoBehaviour {
 
 	void Awake()
 	{
-		_dropTime = Time.time + 5f;
+		_dropTime = Time.time + 1f;
 
 
 	}
@@ -34,7 +34,7 @@ public class GiftSpawner : MonoBehaviour {
 		{
 			instGift = SpawnPresent(_drop1, _drop2, _drop3);
 			Debug.Log("spawn");
-			_dropTime *= 2;
+			_dropTime += 2;
 
 		}
 		if (instGift != null && instGift.transform.position.y < KillZ)
