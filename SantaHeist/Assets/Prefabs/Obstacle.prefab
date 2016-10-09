@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011390854726}
   - 212: {fileID: 212000011331061238}
-  - 61: {fileID: 61000012865826072}
   - 50: {fileID: 50000011127333526}
   - 114: {fileID: 114000011586657976}
+  - 58: {fileID: 58000010176418720}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -60,8 +60,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!61 &61000012865826072
-BoxCollider2D:
+--- !u!58 &58000010176418720
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -73,7 +73,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Radius: 0.85594463
 --- !u!114 &114000011586657976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 88d5aa55c9d4cb74a867effff699dda4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d05747a253acd74bad0650d8a1dbaaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

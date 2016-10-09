@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Control : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class Control : MonoBehaviour {
 	private Image parent;
 	[SerializeField]
 	private InputField input;
+	[SerializeField]
+	private Text timeLeft;
 
 	//Present Spawn Points
 	[SerializeField]
@@ -27,7 +30,10 @@ public class Control : MonoBehaviour {
 	private Text _currentText;
 	private int _currentIndex;
 	private string _currentString;
+	private int _count;
 
+	private float _timeLimit;
+	private float _timeLeft;
 
 	void Awake()
 	{
@@ -44,7 +50,7 @@ public class Control : MonoBehaviour {
 		_currentString = _currentText.text;
 		_currentText.color = Color.yellow;
 		UpdateText();
-		
+		_timeLimit = Time.time + 12f;		
 	}
 
 	void Start()
@@ -53,11 +59,21 @@ public class Control : MonoBehaviour {
 		input.ActivateInputField();
 	}
 
+	void Update()
+	{
+		_timeLeft = _timeLimit - Time.time;
+		timeLeft.text = ((int)_timeLeft).ToString();
+		if(_timeLeft <= 0 )
+		{
+			EvaluateGame();
+		}
+	}
 	public void Compare(InputField field)
 	{
-		if(field.text.Trim().Equals( _currentString.Trim()))
+		if(field.text.Trim().ToLower().Equals( _currentString.Trim().ToLower()))
 		{
 			Debug.Log("correct");
+			_count++;
 			switch (_currentIndex)
 			{
 				case 1:
@@ -80,12 +96,15 @@ public class Control : MonoBehaviour {
 			field.Select();
 			field.text = "";
 			field.ActivateInputField();
-			Debug.Log(_currentIndex);
+			
 			
 		}
 		else
 		{
-			Debug.Log(field.text);
+			UpdateText();
+			field.Select();
+			field.text = "";
+			field.ActivateInputField();
 		}
 	}
 
@@ -100,9 +119,21 @@ public class Control : MonoBehaviour {
 		}
 		else
 		{
-			//End game;
-			//OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
-			//Debug.Log("EndGame");
+			EvaluateGame();
+		}
+	}
+
+	public void EvaluateGame()
+	{
+		if (_count == 5)
+		{
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.GameEnd);
+			Debug.Log("WON");
+		}
+		else
+		{
+			SceneManager.LoadScene("OverworldMap");
+			Debug.Log("LOSE");
 		}
 	}
 }

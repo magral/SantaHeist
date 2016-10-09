@@ -38,10 +38,12 @@ public class StockingControl : MonoBehaviour {
 			points[1] = (new Vector2((Random.Range(_target1.position.x, _target2.position.x)), _target2.position.y));
 		}
 	}
-	public int PathFollow(Rigidbody2D character, List<Vector2> Path, int index, float maxVelocity, float accel, float maxAccel)
+	public int PathFollow(Rigidbody2D character, List<Vector2> Path, int index, float _speed, float accel, float maxAccel)
 	{
-		float distance = DynamicArrive(Path[index], character, maxVelocity, accel, maxAccel);
-		if (distance <= .05f)
+		Vector2 dir = (Path[index] - character.position).normalized * _speed;
+		character.velocity = dir;
+		float distance = Mathf.Abs(Vector2.Distance(character.position, Path[index]));
+		if (distance <= .1f)
 		{
 			index++;
 		}
