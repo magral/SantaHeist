@@ -12,6 +12,7 @@ public class StockingControl : MonoBehaviour {
 	private Rigidbody2D _rb;
 	private List<Vector2> points;
 	private int _start;
+	private int _currentScore;
 	
 	void Awake()
 	{
@@ -20,6 +21,7 @@ public class StockingControl : MonoBehaviour {
 		points.Add(new Vector2(_target1.position.x, _target1.position.y));
 		points.Add(new Vector2(_target2.position.x, _target2.position.y));
 		_start = 0;
+		_currentScore = 0;
 	}
 
 	void Update()
@@ -55,4 +57,5 @@ public class StockingControl : MonoBehaviour {
 		//dv = dv.normalized * Mathf.Min(dv.magnitude * acceleration, maxAccel);
 		rb.AddForce(dv * rb.mass, ForceMode2D.Force);
 	}
+	
 }
