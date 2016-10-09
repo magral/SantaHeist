@@ -329,6 +329,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target1: {fileID: 1914061075}
   _target2: {fileID: 2102930353}
+  _speed: 12
+  _acceleration: 24
+  _maxAcceleration: 48
 --- !u!50 &1835586970
 Rigidbody2D:
   serializedVersion: 2

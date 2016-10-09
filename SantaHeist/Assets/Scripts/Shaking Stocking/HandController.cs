@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class HandController : MonoBehaviour {
 
+	private int _score;
 
+	void Awake()
+	{
+		_score = 0;
+	}
 
 	void Update()
 	{
@@ -16,9 +22,17 @@ public class HandController : MonoBehaviour {
 			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 			if (hit.collider != null && hit.collider.gameObject.GetComponent<StockingControl>() != null)
 			{
-				//Hit stocking;
-				Debug.Log("Hit stocking");
+				_score++;
 			}
+			else
+			{
+				_score--;
+			}
+		}
+		if(_score == 10)
+		{
+			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game5);
+			SceneManager.LoadScene("OverworldMap");
 		}
 	}
 

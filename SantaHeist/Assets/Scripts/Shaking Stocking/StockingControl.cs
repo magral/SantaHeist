@@ -8,11 +8,16 @@ public class StockingControl : MonoBehaviour {
 	private Transform _target1;
 	[SerializeField]
 	private Transform _target2;
+	[SerializeField]
+	private float _speed;
+	[SerializeField]
+	private float _acceleration;
+	[SerializeField]
+	private float _maxAcceleration;
 
 	private Rigidbody2D _rb;
 	private List<Vector2> points;
 	private int _start;
-	private int _currentScore;
 	
 	void Awake()
 	{
@@ -21,15 +26,16 @@ public class StockingControl : MonoBehaviour {
 		points.Add(new Vector2(_target1.position.x, _target1.position.y));
 		points.Add(new Vector2(_target2.position.x, _target2.position.y));
 		_start = 0;
-		_currentScore = 0;
 	}
 
 	void Update()
 	{
-		_start = PathFollow(_rb, points, _start, 4, 8, 16);
+		_start = PathFollow(_rb, points, _start, _speed, _acceleration, _maxAcceleration);
 		if(_start > 1)
 		{
 			_start = 0;
+			points[0] = (new Vector2((Random.Range(_target1.position.x, _target2.position.x)), _target1.position.y));
+			points[1] = (new Vector2((Random.Range(_target1.position.x, _target2.position.x)), _target2.position.y));
 		}
 	}
 	public int PathFollow(Rigidbody2D character, List<Vector2> Path, int index, float maxVelocity, float accel, float maxAccel)
@@ -54,7 +60,6 @@ public class StockingControl : MonoBehaviour {
 	public void AccelerateClamped(Vector2 target, Rigidbody2D rb, float acceleration, float maxAccel)
 	{
 		Vector2 dv = target - rb.velocity;
-		//dv = dv.normalized * Mathf.Min(dv.magnitude * acceleration, maxAccel);
 		rb.AddForce(dv * rb.mass, ForceMode2D.Force);
 	}
 	
