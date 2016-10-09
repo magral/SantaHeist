@@ -38,7 +38,6 @@ public class SackController : MonoBehaviour {
 		{
 			OverworldControl.Instance.TransitionState(OverworldControl.GameState.Game2);
 			SceneManager.LoadScene("OverworldMap");
-			Debug.Log("YOU WIN");
 		}
 
 	}
@@ -47,6 +46,11 @@ public class SackController : MonoBehaviour {
 	{
 		_score += 1;
 		Destroy(other.gameObject);
+	}
+
+	public void GameLost()
+	{
+		SceneManager.LoadScene("OverworldMap");
 	}
 
 }

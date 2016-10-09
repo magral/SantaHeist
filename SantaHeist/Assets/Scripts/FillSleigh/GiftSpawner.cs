@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GiftSpawner : MonoBehaviour {
 
@@ -15,6 +16,12 @@ public class GiftSpawner : MonoBehaviour {
 
 	[SerializeField]
 	private float KillZ;
+
+	[SerializeField]
+	private Image _progress;
+
+	[SerializeField]
+	private SackController _sack;
 
 	private float _dropTime;
 	private float _timeTilDrop;
@@ -39,6 +46,11 @@ public class GiftSpawner : MonoBehaviour {
 		if (instGift != null && instGift.transform.position.y < KillZ)
 		{
 			Destroy(instGift.gameObject);
+			_progress.fillAmount = _progress.fillAmount - .33f;
+			if(_progress.fillAmount < .1f)
+			{
+				_sack.GameLost();
+			}
 		}
 	}
 	public GameObject SpawnPresent(Transform p1, Transform p2, Transform p3)
