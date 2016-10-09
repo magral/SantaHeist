@@ -12,6 +12,8 @@ public class ButtonMash : MonoBehaviour {
 	private Image _progressBar;
 	[SerializeField]
 	private Text _timeText;
+	[SerializeField]
+	private Animator _anim;
 
 	public enum Keys
 	{
@@ -23,6 +25,7 @@ public class ButtonMash : MonoBehaviour {
 	private Keys _nextKey;
 	private int _timeLimit;
 	private int _timeLeft;
+
 
 	void Awake()
 	{
@@ -51,6 +54,7 @@ public class ButtonMash : MonoBehaviour {
 				_key = _nextKey;
 				if(_nextKey == Keys.Q)
 				{
+					_anim.Play("santa_down");
 					_buttonQ.color = Color.grey;
 					_buttonW.color = Color.white;
 					_nextKey = Keys.W;
@@ -58,6 +62,7 @@ public class ButtonMash : MonoBehaviour {
 				}
 				else
 				{
+					_anim.Play("santa_up");
 					_buttonQ.color = Color.white;
 					_buttonW.color = Color.grey;
 					_nextKey = Keys.Q;
@@ -65,7 +70,7 @@ public class ButtonMash : MonoBehaviour {
 			}
 			else
 			{
-				//Incorrect
+				_anim.Play("santa_down");
 			}
 		}
 		else if (Input.GetKeyDown(KeyCode.W))
@@ -77,6 +82,7 @@ public class ButtonMash : MonoBehaviour {
 				_key = _nextKey;
 				if (_nextKey == Keys.W)
 				{
+					_anim.Play("santa_up");
 					_buttonQ.color = Color.white;
 					_buttonW.color = Color.grey;
 					_nextKey = Keys.Q;
@@ -84,6 +90,7 @@ public class ButtonMash : MonoBehaviour {
 				}
 				else
 				{
+					_anim.Play("santa_down");
 					_buttonQ.color = Color.grey;
 					_buttonW.color = Color.white;
 					_nextKey = Keys.W;
@@ -91,7 +98,7 @@ public class ButtonMash : MonoBehaviour {
 			}
 			else
 			{
-				//Incorrect
+				_anim.Play("santa_down");
 			}
 
 		}
